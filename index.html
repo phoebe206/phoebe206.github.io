@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phoebe Bryar Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a cryogenic lab notebook. A dark "cold" hero with a short welcome,
+   then a light paper body where each entry pairs its notes with real photos from the lab and shop. */
+:root {
+  --paper: #f4f6f8;
+  --sheet: #ffffff;
+  --ink: #101b27;
+  --muted: #586678;
+  --rule: #d6dee7;
+  --frost: #2b7bbf;
+  --frost-soft: #e3eef8;
+  --cold: #0b1622;
+  --cold-ink: #e8f1fa;
+  --cold-muted: #8fa5bb;
+  --cold-line: #5fb1ef;
+  --copper: #c4723a;
+  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e151d; --sheet: #141e29; --ink: #e5edf5; --muted: #98a8ba;
+    --rule: #263443; --frost: #6db6ef; --frost-soft: #16293b;
+    --cold: #070e16; --copper: #e08a4e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e151d; --sheet: #141e29; --ink: #e5edf5; --muted: #98a8ba;
+  --rule: #263443; --frost: #6db6ef; --frost-soft: #16293b;
+  --cold: #070e16; --copper: #e08a4e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--frost); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible { outline: 2px solid var(--cold-line); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3, h4 { font-family: var(--display); line-height: 1; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+img, video { max-width: 100%; display: block; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+/* Nav */
+nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--cold) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid #1d2c3c; }
+nav .wrap { display: flex; justify-content: space-between; align-items: center; height: 54px; gap: 16px; }
+nav .mark { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; color: var(--cold-ink); text-decoration: none; }
+nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: 13px; }
+nav ul a { color: var(--cold-muted); text-decoration: none; }
+nav ul a:hover { color: var(--cold-ink); }
+
+/* Hero */
+.hero { background: var(--cold); color: var(--cold-ink); padding: 56px 0; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .35;
+  background: linear-gradient(#16273a 1px, transparent 1px) 0 0 / 32px 32px, linear-gradient(90deg, #16273a 1px, transparent 1px) 0 0 / 32px 32px; }
+.hero .wrap { position: relative; display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: center; }
+.headshot { margin: 0; border-radius: 6px; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid #22344a; }
+.headshot img { width: 100%; height: 100%; object-fit: cover; }
+.eyebrow { font-family: var(--mono); font-size: 13px; color: var(--cold-line); letter-spacing: .06em; }
+.hero h1 { margin-top: 12px; font-size: clamp(40px, 5.5vw, 68px); font-weight: 900; text-transform: uppercase; line-height: .95; }
+.hero .lede { margin-top: 26px; font-size: 21px; line-height: 1.55; max-width: 58ch; }
+.hero .lede em { color: var(--cold-line); font-style: normal; }
+.links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.btn { display: inline-flex; align-items: center; padding: 10px 18px; border: 1px solid var(--cold-muted); border-radius: 3px; font-family: var(--mono); font-size: 13.5px; color: var(--cold-ink); text-decoration: none; transition: border-color .2s, background .2s; }
+.btn.primary { background: var(--cold-line); border-color: var(--cold-line); color: #06121e; font-weight: 500; }
+.btn:hover { border-color: var(--cold-ink); }
+.btn.primary:hover { background: #8cc8f4; }
+.tape { width: 100%; height: auto; display: block; }
+.tape text { font-family: var(--mono); font-size: 11.5px; fill: var(--cold-muted); }
+.tape .lbl { fill: var(--cold-ink); }
+.tape .leader { stroke: var(--cold-muted); stroke-width: 1; fill: none; }
+.tape .layer { animation: settle .9s cubic-bezier(.2,.7,.2,1) both; }
+.tape .layer:nth-of-type(2) { animation-delay: .08s } .tape .layer:nth-of-type(3) { animation-delay: .16s }
+.tape .layer:nth-of-type(4) { animation-delay: .24s } .tape .layer:nth-of-type(5) { animation-delay: .32s }
+.tape .layer:nth-of-type(6) { animation-delay: .40s } .tape .layer:nth-of-type(7) { animation-delay: .48s }
+@keyframes settle { from { transform: translateX(-14px); } to { transform: none; } }
+.facts { margin-top: 26px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid #22344a; }
+.facts div { padding: 14px 14px 0 0; }
+.facts b { display: block; font-family: var(--display); font-weight: 800; font-size: 30px; font-variant-numeric: tabular-nums; }
+.facts span { font-family: var(--mono); font-size: 12px; color: var(--cold-muted); }
+
+/* Projects list: one project per block, short bullets on the left, photos on the right. */
+section { padding: 72px 0 16px; }
+.sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 8px; border-bottom: 2px solid var(--ink); padding-bottom: 12px; }
+.sec-head .num { font-family: var(--mono); font-size: 13px; color: var(--frost); }
+.sec-head h2 { font-size: clamp(40px, 5vw, 60px); font-weight: 900; text-transform: uppercase; }
+.proj { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; padding: 40px 0; border-bottom: 1px solid var(--rule); align-items: start; }
+.proj:last-child { border-bottom: none; }
+.proj h3 { font-size: 34px; font-weight: 800; text-transform: uppercase; letter-spacing: .01em; }
+.meta { margin-top: 8px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.proj h4 { margin: 20px 0 6px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--frost); }
+.proj ul { margin: 14px 0 0; padding-left: 20px; }
+.proj h4 + ul { margin-top: 0; }
+.proj li { margin-bottom: 6px; font-size: 17px; }
+.proj li::marker { color: var(--frost); }
+.pics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pics .full { grid-column: 1 / -1; }
+.pic { border-radius: 4px; overflow: hidden; border: 1px solid var(--rule); background: var(--frost-soft); aspect-ratio: 4 / 3; }
+.pic img, .pic video { width: 100%; height: 100%; object-fit: cover; }
+.pic.fit { background: #fff; }
+.pic.fit img { object-fit: contain; }
+.pic.dark { background: #000; }
+.pic.dark img { object-fit: contain; }
+.pic.tall { aspect-ratio: 3 / 4; }
+.pic.svg { background: #fff; display: flex; align-items: center; padding: 10px; }
+.pic.svg svg { width: 100%; height: auto; }
+.d-thin { stroke: #586678; stroke-width: 1; fill: none; }
+.fill-ink { fill: #101b27; } .fill-frost { fill: #2b7bbf; } .fill-copper { fill: #c4723a; }
+.pic.svg text { font-family: var(--mono); font-size: 10.5px; fill: #586678; }
+.pic.svg text.k { fill: #101b27; }
+.caption { margin-top: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); grid-column: 1 / -1; }
+
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; padding: 32px 0 8px; }
+.about p { max-width: 56ch; }
+.splits div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--rule); font-size: 16px; }
+.splits span:last-child { font-family: var(--mono); font-size: 13px; color: var(--muted); white-space: nowrap; }
+.skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px 32px; padding-top: 32px; }
+.skills h4 { margin: 0 0 10px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+.skills ul { list-style: none; margin: 0; padding: 0; }
+.skills li { padding: 2px 0; font-size: 16px; }
+
+
+/* Tabs */
+.tabbar { position: sticky; top: 54px; z-index: 9; background: var(--paper); border-bottom: 1px solid var(--rule); }
+.tabbar .wrap { display: flex; gap: 4px; overflow-x: auto; }
+.tab { flex: none; padding: 16px 18px 14px; font-family: var(--mono); font-size: 13.5px; color: var(--muted); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--frost); font-weight: 500; }
+.tab:focus-visible { outline: 2px solid var(--frost); outline-offset: -2px; }
+.panel[hidden] { display: none; }
+.panel { scroll-margin-top: 110px; }
+.sec-head { flex-wrap: wrap; }
+.sec-sub { flex-basis: 100%; font-family: var(--mono); font-size: 13px; color: var(--muted); margin-top: 4px; }
+.job { display: grid; grid-template-columns: 1fr 1.3fr; gap: 12px 48px; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+.job:last-child { border-bottom: none; }
+.job h3 { font-size: 30px; font-weight: 800; text-transform: uppercase; }
+.job ul { margin: 0; padding-left: 20px; }
+.job li { margin-bottom: 6px; font-size: 17px; }
+.job li::marker { color: var(--frost); }
+@media (max-width: 900px) { .job { grid-template-columns: 1fr; } }
+
+footer { margin-top: 80px; background: var(--cold); color: var(--cold-ink); padding: 56px 0; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; }
+footer h2 { font-size: clamp(26px, 3vw, 34px); font-weight: 900; text-transform: uppercase; }
+footer .links { margin-top: 0; }
+footer small { display: block; width: 100%; margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--cold-muted); }
+
+@media (max-width: 900px) {
+  .proj, .about { grid-template-columns: 1fr; }
+  .skills { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: 1fr; gap: 32px; } .headshot { max-width: 240px; } nav ul { display: none; } }
+@media (max-width: 520px) { .wrap { padding: 0 18px; } .proj h3 { font-size: 28px; } .facts b { font-size: 24px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .tape .layer { animation: none; } }
+</style>
+</head>
+<body>
+
+<nav aria-label="Sections">
+  <div class="wrap">
+    <a class="mark" href="#top">Phoebe Bryar's Portfolio</a>
+    <ul>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Mechanical Engineering · Tufts University · Class of 2028</p>
+      <h1>Phoebe Bryar</h1>
+      <p class="lede">Welcome to my portfolio! I'm a junior at Tufts University studying mechanical engineering, interested in clean energy, product design, and materials testing. At Tufts, I've spent a year testing and modeling high-temperature superconducting (HTS) tapes in Prof. Luisa Chiesa's Applied Superconductivity Lab. Learn about my research contributions and projects below!</p>
+      <div class="links">
+        <a class="btn primary" href="mailto:phoebe.bryar@tufts.edu">phoebe.bryar@tufts.edu</a>
+        <a class="btn" href="https://www.linkedin.com/in/phoebe-bryar/">LinkedIn</a>
+      </div>
+    </div>
+    <figure class="headshot"><img src="img/phoebe.jpg" alt="Phoebe Bryar smiling in a green jacket and beanie in front of a snowy lake and mountains"></figure>
+  </div>
+</header>
+
+<div class="tabbar">
+  <div class="wrap" role="tablist" aria-label="Portfolio sections">
+    <a class="tab" role="tab" href="#research" data-tab="research">Research</a>
+    <a class="tab" role="tab" href="#projects" data-tab="projects">Projects</a>
+    <a class="tab" role="tab" href="#work" data-tab="work">Work Experience</a>
+  </div>
+</div>
+
+<main>
+
+<section id="research" class="panel" role="tabpanel">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>Research</h2><p class="sec-sub">Applied Superconductivity Lab · Prof. Luisa Chiesa · Tufts University</p></div>
+
+    <article class="proj">
+      <div>
+        <h3>Mechanical Testing of Superconducting Cables</h3>
+        <p class="meta">Chiesa Lab · Fall 2026 – present</p>
+        <ul>
+          <li>Ran tensile tests on superconducting cables at room temperature, 173 K and 77 K.</li>
+          <li>Used Instron temperature chambers, LN₂ rigs, extensometers and LabVIEW data acquisition.</li>
+          <li>Calculated axial stiffness, permanent set and effective Young's modulus.</li>
+          <li>Designed an experiment to measure extensometer contraction during cooldown, correcting CTE measurements.</li>
+        </ul>
+        <h4>Challenges</h4>
+        <ul>
+          <li>The extensometer had no calibration factor for changing temperatures.</li>
+          <li>Slightly bent samples shifted calculated axial rigidity by up to 30%, depending on extensometer position.</li>
+        </ul>
+        <h4>Lessons learned</h4>
+        <ul>
+          <li>Troubleshooting complex testing setups to improve result accuracy.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic tall"><img src="img/cable-chamber.jpg" alt="Cable sample inside an Instron temperature chamber with an extensometer attached" loading="lazy"></div>
+        <div class="pic tall"><img src="img/cable-extensometer.jpg" alt="Superconducting cable mounted in the Instron with an extensometer" loading="lazy"></div>
+        <div class="pic fit full"><img src="img/cte-setup.png" alt="CTE test setups: LN2 rig with temperature points A and B, and the Instron chamber" loading="lazy"></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>FEA of an HTS Tape in Tension and Torsion</h3>
+        <p class="meta">Chiesa Lab · Summer 2026 · Ansys APDL, MATLAB</p>
+        <ul>
+          <li>Built a layered solid-shell model (Cu / Ag / REBCO / Hastelloy / Cu) of one REBCO tape sample.</li>
+          <li>Validated it in tension: REBCO strain matched measured data within 0.2%.</li>
+          <li>Swept seven twist pitches (90–200 mm); edge strain matched analytical theory within 3.1–8.5%.</li>
+          <li>Fit an Ekin + Weibull model to predict critical current, giving I<sub>c</sub>/I<sub>c0</sub> = 0.73 at 90 mm pitch.</li>
+        </ul>
+        <h4>Challenges</h4>
+        <ul>
+          <li>No experimental torsion data exists for this tape.</li>
+          <li>Generic Hastelloy properties left a 13–16% stress gap in tension.</li>
+        </ul>
+        <h4>Lessons learned</h4>
+        <ul>
+          <li>Tighter twists induce greater axial strain; the strain profile peaks at the edges of the tape and is near zero at the center.</li>
+          <li>Critical current holds steady at low strain, then drops off sharply past about 0.26% axial strain.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic fit full"><img src="img/fea-pitch-sweep.png" alt="REBCO axial strain across the tape width for seven twist pitches" loading="lazy"></div>
+        <div class="pic fit"><img src="img/fea-tension-validation.png" alt="FEA vs measured stress-strain in tension" loading="lazy"></div>
+        <div class="pic fit"><img src="img/fea-ic-strain.png" alt="Normalized critical current vs axial strain" loading="lazy"></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>APDL Quick Start Guide</h3>
+        <p class="meta">Chiesa Lab · Jan – Aug 2026 · co-written with three labmates</p>
+        <ul>
+          <li>Wrote a 35-page guide to Ansys APDL for new lab members.</li>
+          <li>Built three demo cases: a rod in tension, a shaft in torsion and an I-beam in bending.</li>
+          <li>Coded a looped mesh convergence study; strain energy converged to 0.04% change.</li>
+        </ul>
+        <h4>Challenges</h4>
+        <ul>
+          <li>The model has to be fully wiped between convergence runs, in the right order, or APDL errors out.</li>
+        </ul>
+        <h4>Lessons learned</h4>
+        <ul>
+          <li>Strain energy is a stricter convergence check than tip displacement.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic dark full"><img src="img/apdl-ibeam.jpg" alt="Ansys result of the I-beam in bending demo case" loading="lazy"></div>
+        <div class="pic dark"><img src="img/apdl-rod.jpg" alt="Ansys result of the rod in tension demo case" loading="lazy"></div>
+        <div class="pic dark"><img src="img/apdl-shaft.jpg" alt="Ansys result of the shaft in torsion demo case" loading="lazy"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="projects" class="panel" role="tabpanel">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>Projects</h2></div>
+
+    <article class="proj">
+      <div>
+        <h3>Motorized Maze Game</h3>
+        <p class="meta">Spring 2026 · KB2040, stepper motors</p>
+        <ul>
+          <li>Designed and fabricated a maze game moved by a joystick-controlled XY gantry.</li>
+          <li>Programmed a KB2040 to read the joystick and drive two stepper motors.</li>
+          <li>Built an H-bridge circuit for directional control.</li>
+          <li>Made parts with a laser cutter and 3D printer, with timing belts, pulleys and bearings for motion.</li>
+        </ul>
+        <h4>Challenges</h4>
+        <ul>
+          <li>Building a system that moves smoothly with zero budget.</li>
+          <li>Programming the KB2040 to calibrate the joystick's center, and troubleshooting faulty joystick pins.</li>
+        </ul>
+        <h4>Lessons learned</h4>
+        <ul>
+          <li>Designing with available resources when ideal parts are unavailable or out of budget.</li>
+          <li>Integrating analog inputs and motion outputs with a KB2040.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic full"><video src="img/maze.mp4" poster="img/maze-poster.jpg" controls playsinline preload="none" aria-label="Video of the maze game being played"></video></div>
+        <div class="pic"><img src="img/maze-box.jpg" alt="Laser-cut wooden maze game box with a joystick" loading="lazy"></div>
+        <div class="pic"><img src="img/maze-gantry.jpg" alt="XY gantry with stepper motors, belts and wiring" loading="lazy"></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>Adaptable Mobile Desk</h3>
+        <p class="meta">Spring 2026 · Engineering Design I · team of 5</p>
+        <ul>
+          <li>Designed a rolling standing desk for a middle school teacher with cerebral palsy.</li>
+          <li>Created CAD models, BOMs and engineering drawings in SolidWorks.</li>
+          <li>Final desk has a supportive handle, file and pencil storage, and a three-mode availability sign.</li>
+        </ul>
+        <h4>Challenges</h4>
+        <ul>
+          <li>Using his walking sticks as handles allowed too much movement to walk safely.</li>
+          <li>Trained in the woodworking shop to fabricate a sturdy desktop.</li>
+        </ul>
+        <h4>Lessons learned</h4>
+        <ul>
+          <li>Prototyping and holding design reviews to improve the product with each iteration.</li>
+          <li>Working directly with a client to design for mobility and classroom safety.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic full"><img src="img/desk-assembled.jpg" alt="Assembled desktop with handle, sign, storage and a small chair" loading="lazy"></div>
+        <div class="pic"><img src="img/desk-available.jpg" alt="Rotating availability sign showing AVAILABLE" loading="lazy"></div>
+        <div class="pic"><img src="img/desk-handle.jpg" alt="Aluminum handle in 3D-printed holders bolted to the desktop" loading="lazy" style="object-position:30% 50%"></div>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>Timoshenko Cantilever Beam</h3>
+        <p class="meta">Spring 2026 · Numerical Methods · MATLAB, Ansys</p>
+        <ul>
+          <li>Compared three ways to predict tip deflection of a short, thick cantilever beam: Euler-Bernoulli theory (the standard textbook model), Timoshenko theory (which adds shear deformation), and a 3D finite element simulation in Ansys.</li>
+          <li>Built finite-difference and shooting-method solvers in MATLAB for the Timoshenko equations and validated both against the closed-form solution. The finite-difference error converged at second order (p ≈ 1.91), as theory predicts.</li>
+          <li>Ran a six-level Ansys mesh convergence study and extrapolated the converged result with a power-law fit (R² = 0.998).</li>
+        </ul>
+        <h4>Challenges</h4>
+        <ul>
+          <li>The shooting method's error sat at machine precision, so its convergence rate couldn't be measured. Its "slope" was just rounding noise.</li>
+        </ul>
+        <h4>Lessons learned</h4>
+        <ul>
+          <li>For a stubby beam (length-to-height ratio of 5), Euler-Bernoulli underpredicts deflection by about 2.4%. Timoshenko comes within about 1% of the 3D simulation, at a fraction of the computational cost.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic svg full"><svg viewBox="0 0 300 170" role="img" aria-label="Dot plot of tip deflection: Euler-Bernoulli 0.568 mm, Ansys FEA 0.582 mm, Timoshenko 0.586 mm.">
+            <text x="10" y="18" class="k">TIP DEFLECTION |w(L)|, mm</text>
+            <g class="d-thin" stroke-dasharray="2 4"><path d="M71.25 34 V128"/><path d="M133.75 34 V128"/><path d="M196.25 34 V128"/><path d="M258.75 34 V128"/></g>
+            <path d="M40 128 H290" class="d-thin"/>
+            <text x="71.25" y="144" text-anchor="middle">0.56</text><text x="133.75" y="144" text-anchor="middle">0.57</text>
+            <text x="196.25" y="144" text-anchor="middle">0.58</text><text x="258.75" y="144" text-anchor="middle">0.59</text>
+            <path d="M40 52 H122.5" class="d-thin"/><circle cx="122.5" cy="52" r="5.5" class="fill-ink"/>
+            <text x="131" y="49" class="k">Euler-Bernoulli</text><text x="131" y="62">0.568</text>
+            <path d="M40 82 H208.75" class="d-thin"/><circle cx="208.75" cy="82" r="5.5" class="fill-copper"/>
+            <text x="200" y="79" text-anchor="end" class="k">Ansys FEA</text><text x="200" y="91" text-anchor="end">≈ 0.582</text>
+            <path d="M40 112 H233.1" class="d-thin"/><circle cx="233.1" cy="112" r="5.5" class="fill-frost"/>
+            <text x="225" y="109" text-anchor="end" class="k">Timoshenko</text><text x="225" y="121" text-anchor="end">0.586</text>
+            
+          </svg></div>
+        <p class="caption">Tip deflection from each model. The axis starts at 0.555 mm to show the gap.</p>
+      </div>
+    </article>
+
+    <article class="proj">
+      <div>
+        <h3>Motor Controller PCB</h3>
+        <p class="meta">Fall 2026 · Electronics &amp; Controls I · KiCad</p>
+        <ul>
+          <li>Designed a PCB with an H-bridge circuit that drives a motor with a KB2040.</li>
+          <li>Drew the schematic and laid out the board in KiCad.</li>
+        </ul>
+      </div>
+      <div class="pics">
+        <div class="pic fit"><img src="img/pcb-schematic.png" alt="KiCad schematic of the H-bridge motor controller" loading="lazy"></div>
+        <div class="pic" style="background:#0d1a2b"><img src="img/pcb-layout.png" alt="KiCad board layout of the motor controller" loading="lazy" style="object-fit:contain"></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="work" class="panel" role="tabpanel">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2>Work Experience</h2></div>
+
+    <article class="job">
+      <div>
+        <h3>Marathon Sports</h3>
+        <p class="meta">Retail Employee · Cambridge, MA · June 2026 – present</p>
+      </div>
+      <ul>
+        <li>Perform gait analysis with customers, one on one.</li>
+        <li>Use foot-scanning technology to match runners to shoes for their gait and injury history.</li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div>
+        <h3>Applied Superconductivity Lab, Tufts</h3>
+        <p class="meta">Undergraduate Research Assistant · Medford, MA · Jan 2026 – present</p>
+      </div>
+      <ul>
+        <li>Cryogenic mechanical testing of superconducting cables and FEA modeling of HTS tapes.</li>
+        <li>See the <a href="#research" data-tab-link="research">Research tab</a> for details.</li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div>
+        <h3>Little Water Cantina</h3>
+        <p class="meta">Server · Seattle, WA · May – Aug 2025</p>
+      </div>
+      <ul>
+        <li>Served and hosted at a busy summer restaurant.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get in touch</h2>
+    <div class="links">
+      <a class="btn primary" href="mailto:phoebe.bryar@tufts.edu">phoebe.bryar@tufts.edu</a>
+      <a class="btn" href="https://www.linkedin.com/in/phoebe-bryar/">LinkedIn</a>
+    </div>
+    <small>Phoebe Bryar · Somerville, MA · B.S. Mechanical Engineering, Tufts University, May 2028</small>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var names = ["research", "projects", "work"];
+  var tabs = document.querySelectorAll(".tab");
+  function show(name, scroll) {
+    if (names.indexOf(name) < 0) name = "research";
+    names.forEach(function (n) { document.getElementById(n).hidden = n !== name; });
+    tabs.forEach(function (t) { t.setAttribute("aria-selected", t.dataset.tab === name ? "true" : "false"); });
+    if (scroll) {
+      var bar = document.querySelector(".tabbar");
+      window.scrollTo({ top: bar.offsetTop - 54, behavior: "auto" });
+    }
+  }
+  function fromHash(scroll) { show((location.hash || "").slice(1), scroll); }
+  window.addEventListener("hashchange", function () { if (names.indexOf(location.hash.slice(1)) >= 0) fromHash(true); });
+  fromHash(false);
+})();
+</script>
+</body>
+</html>
